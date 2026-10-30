@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b1b20">
+<meta name="description" content="A date-based study planner with saved history, calendar navigation and a pure-tone audio player.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<title>My Week — Calendar Planner</title>
+<style>
+:root{color-scheme:dark;--bg:#111114;--panel:#1b1b20;--panel2:#222228;--text:#f4f4f5;--muted:#a4a4ad;--line:rgba(235,235,245,.12);--accent:#c8c8d0;--accent2:#8e8e99;--good:#cbd5cb;--shadow:0 18px 60px #0005}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0%,#3a3a4055 0,transparent 36%),radial-gradient(ellipse at 100% 25%,#30303855 0,transparent 32%),linear-gradient(145deg,#111114,#19191e 55%,#111114);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;padding:18px 14px 48px}button,input,textarea,select{font:inherit}button{cursor:pointer;color:var(--text);border:1px solid var(--line);background:#ffffff0b;border-radius:12px;padding:10px 13px;transition:background .16s,border-color .16s}button:hover{background:#ffffff15;border-color:#ffffff35}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #d5d5de;outline-offset:2px}button:disabled{opacity:.45;cursor:not-allowed}.app{max-width:930px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:19px}.brand{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#dedee4;font-weight:800}.tiny{color:var(--muted);font-size:12px}.top-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.hero{padding:24px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#3b3b4250,#25252bdb 58%,#37373d6b);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.hero-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.eyebrow{font-size:11px;color:#c5c5ce;text-transform:uppercase;letter-spacing:.16em;font-weight:750}.date{font-size:clamp(28px,6vw,42px);letter-spacing:-.045em;line-height:1.1;margin:9px 0 8px;font-weight:800}.subtitle{color:#c4c4cc;font-size:13px;line-height:1.5}.today-pill{white-space:nowrap;font-size:11px;border:1px solid #d9d9e033;background:#11111455;border-radius:99px;padding:8px 11px;color:#e3e3e8}.progress-wrap{margin-top:22px}.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:8px}.progress{height:7px;background:#ffffff1c;border-radius:99px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#8d8d98,#dedee4);border-radius:99px;transition:width .2s}.datebar{display:grid;grid-template-columns:42px 1fr 42px;gap:9px;margin:15px 0 9px}.datebar button{min-height:44px}.datebar .date-input{width:100%;background:#ffffff0b;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:9px 12px;text-align:center}.week-strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:22px}.day-chip{padding:9px 3px;display:flex;flex-direction:column;align-items:center;gap:4px;border-radius:12px;font-size:11px;color:var(--muted);min-width:0}.day-chip strong{font-size:14px;color:var(--text)}.day-chip.active{background:#bdbdc51c;border-color:#d1d1da66;color:white}.day-chip.today:not(.active){border-color:#d1d1da66}.day-chip .dot{height:4px;width:4px;border-radius:50%;background:#b9b9c2}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 2px 11px}.section-head h2{font-size:17px;margin:0}.actions{display:flex;gap:7px;flex-wrap:wrap}.action-small{font-size:12px;padding:8px 10px}.tasks{display:flex;flex-direction:column;gap:8px}.task{display:grid;grid-template-columns:23px 105px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:16px;background:#202026d9;backdrop-filter:blur(13px)}.task.done{opacity:.58}.task.done .task-title{text-decoration:line-through;color:var(--muted)}.check{appearance:none;width:20px;height:20px;border:1.5px solid #8a8a95;border-radius:7px;display:grid;place-items:center;margin:0;cursor:pointer;background:#ffffff05}.check:checked{background:#d1d1d8;border-color:#d1d1d8}.check:checked:after{content:"✓";font-size:14px;font-weight:900;color:#17171b}.time{font-size:12px;line-height:1.45;color:#d0d0d7;font-weight:750}.task-title{font-size:14px;font-weight:680;line-height:1.35}.task-note{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}.task-actions{display:flex;gap:5px}.icon-btn{padding:7px 8px;font-size:11px}.tag{font-size:10px;color:#dedee4;background:#ffffff0b;border:1px solid var(--line);border-radius:99px;padding:5px 7px;white-space:nowrap}.empty{padding:25px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted)}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:20px}.mini-card{padding:16px;border:1px solid var(--line);border-radius:16px;background:#1b1b20b8}.mini-card h3{font-size:13px;margin:0 0 7px}.mini-card p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}.audio{margin-top:14px;padding:18px;border:1px solid var(--line);border-radius:19px;background:linear-gradient(140deg,#29292fdd,#19191edb)}.audio-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.audio h2{font-size:16px;margin:0 0 5px}.audio p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}.audio-status{font-size:11px;padding:6px 9px;border:1px solid var(--line);border-radius:99px;color:#d6d6de;white-space:nowrap}.beat-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:14px}.beat-preset{padding:10px 5px;text-align:center}.beat-preset b{display:block;font-size:12px}.beat-preset small{font-size:10px;color:var(--muted)}.beat-preset.active{background:#bdbdc522;border-color:#d4d4dc80}.audio-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:12px}.audio-controls input{accent-color:#cfcfd7}.volume-label{font-size:11px;color:var(--muted)}.footer{margin:20px 0 0;text-align:center;color:#81818c;font-size:10px;line-height:1.6}.overlay{display:none;position:fixed;inset:0;z-index:20;background:#050507d9;backdrop-filter:blur(9px);padding:16px;overflow:auto}.overlay.open{display:flex;align-items:flex-start;justify-content:center}.modal{width:min(620px,100%);margin:auto;background:#202026;border:1px solid var(--line);border-radius:21px;padding:19px;box-shadow:0 24px 80px #000b}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}.modal h2{margin:0;font-size:19px}.field{display:flex;flex-direction:column;gap:6px;margin-top:13px}.field label{font-size:12px;color:var(--muted)}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:11px;background:#131317;color:var(--text);padding:11px}.field textarea{min-height:78px;resize:vertical}.modal-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:16px}.primary{background:#d0d0d8;color:#16161a;border:0;font-weight:800}.hint{font-size:11px;line-height:1.6;color:var(--muted);margin-top:10px}.calendar-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0}.month-title{font-size:16px;font-weight:750}.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.cal-weekday{text-align:center;color:var(--muted);font-size:10px;padding:7px 0}.cal-day{min-height:48px;padding:6px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:10px;font-size:12px}.cal-day.muted{opacity:.3}.cal-day.today{border-color:#d9d9e077}.cal-day.selected{background:#bdbdc52b;border-color:#d8d8df}.cal-day .cal-dot{width:5px;height:5px;border-radius:50%;background:#c4c4cd}.file-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#e5e5e9;color:#19191d;border-radius:99px;padding:10px 15px;font-size:12px;font-weight:750;box-shadow:0 8px 30px #0008;display:none;z-index:30;max-width:90vw;text-align:center}.toast.show{display:block}.hidden{display:none!important}
+@media(max-width:600px){body{padding:13px 10px 32px}.hero{padding:19px}.hero-row{gap:8px}.datebar{grid-template-columns:38px 1fr 38px;gap:6px}.week-strip{gap:3px}.day-chip{font-size:10px;padding:8px 1px}.day-chip strong{font-size:12px}.task{grid-template-columns:20px 76px minmax(0,1fr);gap:8px;padding:12px 9px}.task-actions{grid-column:3;justify-content:flex-end}.task-title{font-size:13px}.time{font-size:11px}.tag{display:none}.bottom-grid{grid-template-columns:1fr}.beat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.top-actions button{font-size:11px;padding:8px 9px}.brand{font-size:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+ <header class="top">
+  <div><div class="brand">✦ MY WEEK</div><div class="tiny" style="margin-top:5px">Your date-by-date study planner</div></div>
+  <div class="top-actions"><button id="calendarBtn">▦ Calendar</button><button id="backupBtn">⇩ Backup</button><button id="editFocusBtn">✎ Day focus</button></div>
+ </header>
+ <section class="hero">
+  <div class="hero-row"><div><div class="eyebrow" id="heroEyebrow">Your plan</div><div class="date" id="heroDate">Today</div><div class="subtitle" id="heroSubtitle">A separate plan and history for every date.</div></div><div class="today-pill" id="todayPill">TODAY</div></div>
+  <div class="progress-wrap"><div class="progress-meta"><span id="progressLabel">Daily progress</span><span id="progressCount">0 of 0 done</span></div><div class="progress"><div class="progress-fill" id="progressFill"></div></div></div>
+ </section>
+ <div class="datebar"><button id="prevDate" aria-label="Previous date">←</button><input class="date-input" type="date" id="dateInput" aria-label="Choose date"><button id="nextDate" aria-label="Next date">→</button></div>
+ <div class="week-strip" id="weekStrip"></div>
+ <div class="section-head"><h2 id="listTitle">Today's blocks</h2><div class="actions"><button class="action-small" id="addTaskBtn">＋ Add task</button></div></div>
+ <div class="tasks" id="tasks"></div>
+ <div class="bottom-grid">
+  <div class="mini-card"><h3>Focus for this date</h3><p id="focusText">Follow the next block. Don't plan the whole day again.</p></div>
+  <div class="mini-card"><h3>Saved history</h3><p>Every date has its own tasks and checkmarks. Earlier dates stay unchanged when you move forward. Your data is saved in this browser on this device.</p></div>
+ </div>
+ <section class="audio">
+  <div class="audio-head"><div><h2>Pure-tone audio</h2><p>Stereo sine tones with a small frequency difference. Use headphones at a comfortable, low volume. This is an audio feature, not a guaranteed focus or sleep treatment.</p></div><span class="audio-status" id="audioStatus">STOPPED</span></div>
+  <div class="beat-grid" id="beatGrid">
+   <button class="beat-preset" data-beat="2"><b>Delta</b><small>2 Hz</small></button>
+   <button class="beat-preset" data-beat="6"><b>Theta</b><small>6 Hz</small></button>
+   <button class="beat-preset active" data-beat="10"><b>Alpha</b><small>10 Hz</small></button>
+   <button class="beat-preset" data-beat="20"><b>Beta</b><small>20 Hz</small></button>
+   <button class="beat-preset" data-beat="40"><b>Gamma</b><small>40 Hz</small></button>
+  </div>
+  <div class="audio-controls"><button class="primary" id="audioPlay">▶ Play</button><button id="audioStop">■ Stop</button><label class="volume-label" for="volume">Volume</label><input id="volume" type="range" min="0" max="20" value="5"><span class="volume-label" id="volumeValue">5%</span></div>
+ </section>
+ <div class="file-actions"><button class="action-small" id="exportBtn">Export all dates</button><button class="action-small" id="importBtn">Import backup</button><input id="importFile" type="file" accept="application/json,.json" class="hidden"></div>
+ <div class="footer">MY WEEK · CALENDAR-BASED RECORDS · AUTO-SAVE ON THIS DEVICE</div>
+</div>
+
+<div class="overlay" id="calendarOverlay" role="dialog" aria-modal="true" aria-labelledby="calendarHeading"><div class="modal">
+ <div class="modal-head"><h2 id="calendarHeading">Calendar</h2><button data-close="calendarOverlay">✕</button></div>
+ <div class="calendar-top"><button id="prevMonth">←</button><div class="month-title" id="monthTitle"></div><button id="nextMonth">→</button></div>
+ <div class="calendar-grid" id="calendarGrid"></div>
+ <p class="hint">A dot means that date already has a saved plan. Select any date to open its individual record.</p>
+ <div class="modal-actions"><button id="calendarToday">Go to today</button><button data-close="calendarOverlay">Close</button></div>
+</div></div>
+
+<div class="overlay" id="taskOverlay" role="dialog" aria-modal="true" aria-labelledby="taskHeading"><div class="modal">
+ <div class="modal-head"><h2 id="taskHeading">Add a task</h2><button data-close="taskOverlay">✕</button></div>
+ <div class="field"><label for="taskTime">Time</label><input id="taskTime" maxlength="50" placeholder="e.g. 4:00–5:00 PM"></div>
+ <div class="field"><label for="taskTitle">Task</label><input id="taskTitle" maxlength="120" placeholder="A specific action to complete"></div>
+ <div class="field"><label for="taskNote">Details / target (optional)</label><textarea id="taskNote" maxlength="500" placeholder="Chapter, questions, lecture, or measurable target"></textarea></div>
+ <div class="modal-actions"><button id="deleteTaskBtn" class="hidden">Delete task</button><button data-close="taskOverlay">Cancel</button><button class="primary" id="saveTaskBtn">Save task</button></div>
+</div></div>
+
+<div class="overlay" id="focusOverlay" role="dialog" aria-modal="true" aria-labelledby="focusHeading"><div class="modal">
+ <div class="modal-head"><h2 id="focusHeading">Focus for this date</h2><button data-close="focusOverlay">✕</button></div>
+ <div class="field"><label for="focusInput">Main focus / reminder</label><textarea id="focusInput" maxlength="300" placeholder="e.g. Finish the current QA chapter before moving on."></textarea></div>
+ <div class="modal-actions"><button data-close="focusOverlay">Cancel</button><button class="primary" id="saveFocusBtn">Save focus</button></div>
+</div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+const STORAGE_KEY = 'my_week_calendar_v1';
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const clone = value => JSON.parse(JSON.stringify(value));
+const makeTask = (time,title,note='') => ({id:makeId(),time,title,note,done:false});
+function makeId(){return 't_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)}
+
+// These are starter templates only. The first time a date is opened, its own
+// independent copy is saved under that exact YYYY-MM-DD date key.
+const TEMPLATES = {
+ Monday:{focus:'School Maths + current QA revision and sequence portion.',tasks:[
+  ['4:00–6:15 PM','Maths classes and questions','Work on the current school Maths chapter. Watch the relevant class and solve its questions.'],
+  ['6:30–7:00 PM','YouTube editing','Editing block.'],
+  ['7:00–8:00 PM','QA revision — previous class','Revise what was taught in the previous QA class.'],
+  ['8:00–9:00 PM','QA — sequence portion','Work through the sequence portion.'],
+  ['9:00–10:30 PM','Live IPMAT Maths class','Live class.'],
+  ['10:30–11:00 PM','Daily quiz (fun time)','Complete the daily quiz.']
+ ]},
+ Tuesday:{focus:'Main goal: strengthen the current QA / sequence portion through question-solving and revision.',tasks:[
+  ['4:00–6:30 PM','QA — question-solving and revision','Strictly solve questions and revise the current portion / existing chapter.'],
+  ['6:30–7:00 PM','YouTube editing','Editing block.'],
+  ['7:00–8:00 PM','VA — catch-up and old-topic revision','Catch up on missed sessions and revise older topics.'],
+  ['8:00–8:15 PM','Food break','Dinner / food.'],
+  ['8:15–9:15 PM','Chemistry','Current Chemistry work.'],
+  ['9:15–9:25 PM','Break','Short break.'],
+  ['9:25–11:00 PM','Chemistry — old-chapter questions','Solve questions and revise older Chemistry chapters.'],
+  ['11:00–11:30 PM','Wind-down / buffer','Keep this as a buffer before the quiz.'],
+  ['11:30 PM–12:00 AM','IPMAT daily quiz','Daily quiz.']
+ ]},
+ Wednesday:{focus:'Clear pending QA work, then complete the Physics blocks before the live class.',tasks:[
+  ['4:15–6:30 PM','QA — pending questions and old portions','Work on pending QA questions and older / sequence portions.'],
+  ['6:30–7:00 PM','YouTube editing','Editing block.'],
+  ['7:00–8:00 PM','Physics','Physics study block.'],
+  ['8:00–8:15 PM','Dinner','Dinner break.'],
+  ['8:15–9:00 PM','Physics — questions and old-session review','Solve more questions and review previous Physics sessions.'],
+  ['9:00–10:30 PM','Live IPMAT Maths class','Live class.'],
+  ['10:30–11:00 PM','Free time','Use this time freely.'],
+  ['11:00–11:30 PM','Daily quiz','Daily quiz.']
+ ]},
+ Thursday:{focus:'Physics + VA. No QA block and no YouTube editing.',tasks:[
+  ['4:00–6:00 PM','Physics','Physics study block.'],
+  ['6:00–7:00 PM','Free time / transition','No YouTube editing. Use as a break or buffer.'],
+  ['7:00–8:00 PM','VA practice — block 1','Verbal Ability practice.'],
+  ['8:00–9:00 PM','VA practice — block 2','Continue VA practice.'],
+  ['9:00–10:00 PM','School miscellaneous work','Records or other pending school work.'],
+  ['10:00 PM','Sleep','End the day. No quiz scheduled.']
+ ]},
+ Friday:{focus:'VA revision, Maths, pending school work and the live IPMAT VA class.',tasks:[
+  ['4:15–5:15 PM','VA revision','Revise VA topics.'],
+  ['5:15–6:30 PM','Maths','Maths study block.'],
+  ['6:30–7:15 PM','YouTube editing','Editing block.'],
+  ['7:15–9:00 PM','Pending school work','Complete school work that is still pending.'],
+  ['9:00–10:30 PM','Live IPMAT VA class','Live Verbal Ability class.'],
+  ['10:30–11:00 PM','Daily quiz','Daily quiz.']
+ ]},
+ Saturday:{focus:'Complete Physics first, then Chemistry, video ideation, Maths, quiz and shooting.',tasks:[
+  ['9:00 AM','Wake up','Saturday wake-up time.'],
+  ['9:15–10:15 AM','Physics — session 1','Work on Physics.'],
+  ['10:15–11:00 AM','Break','Recovery break.'],
+  ['11:00 AM–12:00 PM','Physics — session 2','Solve questions. If earlier chapters are complete, begin the next chapter.'],
+  ['12:00–12:15 PM','Break','Short break.'],
+  ['12:15–1:00 PM','Physics — session 3','Finish the planned Physics work.'],
+  ['1:00–2:00 PM','Lunch / rest','Lunch and recovery.'],
+  ['2:00–3:00 PM','Chemistry — classes / session 1','Chemistry class or current topic.'],
+  ['3:00–3:15 PM','Break','Short break.'],
+  ['3:15–4:15 PM','Chemistry — session 2','Continue Chemistry.'],
+  ['4:15–4:45 PM','Break','Half-hour break.'],
+  ['4:45–5:45 PM','Chemistry — session 3','Continue Chemistry and complete the planned target.'],
+  ['5:45–6:30 PM','Rest / transition','No YouTube editing in this period.'],
+  ['6:30–7:30 PM','YouTube ideation and scripting','Plan and write scripts for upcoming videos.'],
+  ['7:30–8:00 PM','Break','Half-hour break before Maths.'],
+  ['8:00–9:00 PM','Maths — session 1','Maths questions / current chapter.'],
+  ['9:00–10:00 PM','Maths — session 2','Continue Maths questions / current chapter.'],
+  ['10:00–10:30 PM','Daily quiz','Daily quiz.'],
+  ['10:30–11:30 PM','YouTube video shoot','Shoot the planned video(s).']
+ ]},
+ Sunday:{focus:'Mock revision, Maths, Chemistry, problem-solving, editing and a fixed movie break.',tasks:[
+  ['9:00 AM','Wake up','Sunday wake-up time.'],
+  ['9:15–10:15 AM','Mock-test question revision','Revise questions in preparation for the mock test.'],
+  ['10:15–11:00 AM','Break / reset','Rest before the study blocks.'],
+  ['11:00 AM–12:00 PM','Maths — session 1','Maths study and questions.'],
+  ['12:00–12:15 PM','Break','Short break.'],
+  ['12:15–1:15 PM','Maths — session 2','Continue Maths study and questions.'],
+  ['1:15–2:15 PM','Lunch / rest','Lunch and recovery.'],
+  ['2:15–3:00 PM','Chemistry — session 1','Chemistry study.'],
+  ['3:00–3:15 PM','Break','Short break.'],
+  ['3:15–4:00 PM','Chemistry — session 2','Continue Chemistry.'],
+  ['4:00–5:00 PM','Flexible catch-up block','Use for unfinished Physics / Maths / Chemistry work.'],
+  ['5:00–6:00 PM','Problem-solving','Dedicated problem-solving session.'],
+  ['6:00–6:30 PM','Break','Rest before the evening.'],
+  ['6:30–7:30 PM','YouTube editing and chill time','Editing and relaxed creator time.'],
+  ['7:30–8:00 PM','Remaining Physics / Maths work','Check the relevant recording and work on whichever subject is still pending.'],
+  ['8:00–10:00 PM','Movie time','Fixed movie time.']
+ ]}
+};
+
+function localDateKey(date){const y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,'0'),d=String(date.getDate()).padStart(2,'0');return `${y}-${m}-${d}`}
+function dateFromKey(key){const [y,m,d]=key.split('-').map(Number);return new Date(y,m-1,d,12,0,0,0)}
+function todayKey(){return localDateKey(new Date())}
+function formatDate(key,opts={weekday:'long',month:'long',day:'numeric',year:'numeric'}){return new Intl.DateTimeFormat('en-IN',opts).format(dateFromKey(key))}
+function safeLoad(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return {version:1,days:{}};const parsed=JSON.parse(raw);if(!parsed||typeof parsed!=='object'||!parsed.days||typeof parsed.days!=='object')throw new Error('Invalid planner data');return parsed}catch(err){console.error(err);return {version:1,days:{}}}}
+let store=safeLoad();let selectedDate=todayKey();let editingTaskId=null;let monthCursor=new Date();monthCursor.setDate(1);let activeBeat=10;let audioContext=null,masterGain=null,oscillators=[];
+function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(store));return true}catch(err){console.error(err);toast('Could not save. Export a backup and free browser storage.');return false}}
+function ensureDate(key){if(!store.days[key]){const date=dateFromKey(key),dayName=DAY_NAMES[date.getDay()],template=TEMPLATES[dayName];store.days[key]={focus:template.focus,tasks:template.tasks.map(([time,title,note])=>makeTask(time,title,note)),createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};persist()}return store.days[key]}
+function currentDay(){return ensureDate(selectedDate)}
+function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function toast(message){const el=document.getElementById('toast');el.textContent=message;el.classList.add('show');clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>el.classList.remove('show'),2600)}
+function setDate(key){if(!/^\d{4}-\d{2}-\d{2}$/.test(key))return;selectedDate=key;ensureDate(key);document.getElementById('dateInput').value=key;render();}
+function renderWeek(){const host=document.getElementById('weekStrip');host.innerHTML='';const center=dateFromKey(selectedDate);const start=new Date(center);start.setDate(center.getDate()-3);for(let i=0;i<7;i++){const d=new Date(start);d.setDate(start.getDate()+i);const key=localDateKey(d),btn=document.createElement('button');btn.className='day-chip'+(key===selectedDate?' active':'')+(key===todayKey()?' today':'');const existing=store.days[key];const dayText=new Intl.DateTimeFormat('en-IN',{weekday:'short'}).format(d);btn.innerHTML=`<span>${dayText}</span><strong>${d.getDate()}</strong>${existing?'<span class="dot"></span>':'<span style="height:4px"></span>'}`;btn.title=formatDate(key);btn.addEventListener('click',()=>setDate(key));host.appendChild(btn)}}
+function renderTasks(){const data=currentDay(),host=document.getElementById('tasks');host.innerHTML='';let done=0;data.tasks.forEach((task,index)=>{if(task.done)done++;const card=document.createElement('article');card.className='task'+(task.done?' done':'');card.innerHTML=`<input class="check" type="checkbox" aria-label="Mark task complete" ${task.done?'checked':''}><div class="time">${esc(task.time||'Flexible')}</div><div><div class="task-title">${esc(task.title)}</div>${task.note?`<div class="task-note">${esc(task.note)}</div>`:''}</div><div class="task-actions"><span class="tag">${task.done?'DONE':'BLOCK '+String(index+1).padStart(2,'0')}</span><button class="icon-btn" aria-label="Edit task">Edit</button></div>`;card.querySelector('.check').addEventListener('change',e=>{task.done=e.target.checked;data.updatedAt=new Date().toISOString();persist();render();});card.querySelector('.icon-btn').addEventListener('click',()=>openTaskEditor(task.id));host.appendChild(card)});if(!data.tasks.length)host.innerHTML='<div class="empty">No tasks for this date yet. Add the first task.</div>';const total=data.tasks.length,pct=total?Math.round(done/total*100):0;document.getElementById('progressCount').textContent=`${done} of ${total} done`;document.getElementById('progressFill').style.width=pct+'%';document.getElementById('progressLabel').textContent=pct===100&&total?'All blocks completed':'Daily progress'}
+function render(){const today=todayKey(),data=currentDay(),isToday=selectedDate===today;document.getElementById('heroEyebrow').textContent=isToday?'Your plan for today':'Your saved plan';document.getElementById('heroDate').textContent=formatDate(selectedDate);document.getElementById('heroSubtitle').textContent='A separate plan and completion record for this date.';document.getElementById('todayPill').textContent=isToday?'TODAY':formatDate(selectedDate,{weekday:'short'}).toUpperCase();document.getElementById('listTitle').textContent=isToday?"Today's blocks":formatDate(selectedDate,{weekday:'long',month:'short',day:'numeric'})+"'s blocks";document.getElementById('focusText').textContent=data.focus||'No focus set for this date.';document.getElementById('dateInput').value=selectedDate;renderWeek();renderTasks()}
+function openOverlay(id){document.getElementById(id).classList.add('open')}
+function closeOverlay(id){document.getElementById(id).classList.remove('open')}
+function openTaskEditor(id=null){editingTaskId=id;const task=id?currentDay().tasks.find(t=>t.id===id):null;document.getElementById('taskHeading').textContent=task?'Edit task':'Add a task';document.getElementById('taskTime').value=task?.time||'';document.getElementById('taskTitle').value=task?.title||'';document.getElementById('taskNote').value=task?.note||'';document.getElementById('deleteTaskBtn').classList.toggle('hidden',!task);openOverlay('taskOverlay')}
+function saveTask(){const title=document.getElementById('taskTitle').value.trim();if(!title){toast('Enter a task title first.');return}const data=currentDay(),existing=editingTaskId?data.tasks.find(t=>t.id===editingTaskId):null;const values={time:document.getElementById('taskTime').value.trim(),title,note:document.getElementById('taskNote').value.trim()};if(existing)Object.assign(existing,values);else data.tasks.push({...makeTask(values.time,values.title,values.note),done:false});data.updatedAt=new Date().toISOString();persist();closeOverlay('taskOverlay');render();toast(existing?'Task updated':'Task added to this date')}
+function deleteTask(){if(!editingTaskId)return;if(!confirm('Delete this task from '+formatDate(selectedDate)+'?'))return;const data=currentDay();data.tasks=data.tasks.filter(t=>t.id!==editingTaskId);data.updatedAt=new Date().toISOString();persist();closeOverlay('taskOverlay');render();toast('Task deleted')}
+function openCalendar(){monthCursor=dateFromKey(selectedDate);renderCalendar();openOverlay('calendarOverlay')}
+function renderCalendar(){const grid=document.getElementById('calendarGrid');grid.innerHTML='';document.getElementById('monthTitle').textContent=new Intl.DateTimeFormat('en-IN',{month:'long',year:'numeric'}).format(monthCursor);['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(n=>{const el=document.createElement('div');el.className='cal-weekday';el.textContent=n;grid.appendChild(el)});const first=new Date(monthCursor.getFullYear(),monthCursor.getMonth(),1);const offset=(first.getDay()+6)%7;const daysInMonth=new Date(monthCursor.getFullYear(),monthCursor.getMonth()+1,0).getDate();const total=Math.ceil((offset+daysInMonth)/7)*7;for(let i=0;i<total;i++){const dayNum=i-offset+1;const d=new Date(monthCursor.getFullYear(),monthCursor.getMonth(),dayNum,12);const key=localDateKey(d),btn=document.createElement('button');btn.className='cal-day'+(d.getMonth()!==monthCursor.getMonth()?' muted':'')+(key===todayKey()?' today':'')+(key===selectedDate?' selected':'');const entry=store.days[key];btn.innerHTML=`<span>${d.getDate()}</span>${entry?'<span class="cal-dot"></span>':'<span style="height:5px"></span>'}`;btn.addEventListener('click',()=>{setDate(key);closeOverlay('calendarOverlay')});grid.appendChild(btn)}}
+function exportBackup(){const payload={app:'My Week Calendar Planner',version:1,exportedAt:new Date().toISOString(),days:store.days};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='my-week-backup-'+todayKey()+'.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('Backup exported')}
+function importBackup(file){const reader=new FileReader();reader.onload=()=>{try{const parsed=JSON.parse(reader.result);if(!parsed||typeof parsed.days!=='object'||!parsed.days||Array.isArray(parsed.days))throw new Error('This file is not a My Week backup.');const cleanDays={};for(const [key,day] of Object.entries(parsed.days)){if(!/^\d{4}-\d{2}-\d{2}$/.test(key)||!day||!Array.isArray(day.tasks))continue;cleanDays[key]={focus:typeof day.focus==='string'?day.focus:'',createdAt:typeof day.createdAt==='string'?day.createdAt:new Date().toISOString(),updatedAt:typeof day.updatedAt==='string'?day.updatedAt:new Date().toISOString(),tasks:day.tasks.filter(t=>t&&typeof t==='object'&&typeof t.title==='string').map(t=>({id:typeof t.id==='string'?t.id:makeId(),time:typeof t.time==='string'?t.time:'',title:t.title,note:typeof t.note==='string'?t.note:'',done:!!t.done}))}}if(!Object.keys(cleanDays).length)throw new Error('No valid date records were found in this backup.');if(!confirm('Import this backup and replace the planner data on this device? Export your current data first if you want to keep it.'))return;store={version:1,days:cleanDays};persist();ensureDate(selectedDate);render();toast('Backup imported')}catch(err){alert('Could not import backup: '+err.message)}};reader.readAsText(file)}
+function saveFocus(){currentDay().focus=document.getElementById('focusInput').value.trim();currentDay().updatedAt=new Date().toISOString();persist();closeOverlay('focusOverlay');render();toast('Date focus saved')}
+
+// Web Audio API binaural-style pure sine tones; audio only starts after a click.
+const BEAT_LABELS={2:'Delta',6:'Theta',10:'Alpha',20:'Beta',40:'Gamma'};
+async function startAudio(){try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC){toast('This browser does not support Web Audio.');return}if(!audioContext){audioContext=new AC();masterGain=audioContext.createGain();masterGain.gain.value=Number(document.getElementById('volume').value)/100;masterGain.connect(audioContext.destination)}if(audioContext.state==='suspended')await audioContext.resume();if(!oscillators.length){const base=220,split=activeBeat;[['L',base,-1],['R',base+split,1]].forEach(([channel,freq,pan])=>{const osc=audioContext.createOscillator(),gain=audioContext.createGain(),panner=audioContext.createStereoPanner();osc.type='sine';osc.frequency.value=freq;gain.gain.value=.45;panner.pan.value=pan;osc.connect(gain);gain.connect(panner);panner.connect(masterGain);osc.start();oscillators.push(osc)})}document.getElementById('audioStatus').textContent=BEAT_LABELS[activeBeat].toUpperCase()+' · PLAYING';document.getElementById('audioPlay').textContent='Ⅱ Pause'}catch(err){console.error(err);toast('Audio could not start. Tap Play again.')}}
+async function pauseAudio(){if(audioContext&&audioContext.state==='running'){await audioContext.suspend();document.getElementById('audioStatus').textContent='PAUSED';document.getElementById('audioPlay').textContent='▶ Resume'}}
+async function stopAudio(){if(audioContext){try{oscillators.forEach(o=>{try{o.stop()}catch(_){}});oscillators=[];await audioContext.close()}catch(e){console.warn(e)}audioContext=null;masterGain=null}document.getElementById('audioStatus').textContent='STOPPED';document.getElementById('audioPlay').textContent='▶ Play'}
+function selectBeat(value){activeBeat=Number(value);document.querySelectorAll('.beat-preset').forEach(b=>b.classList.toggle('active',Number(b.dataset.beat)===activeBeat));if(audioContext){stopAudio().then(startAudio)}}
+
+// Event wiring
+ document.getElementById('prevDate').addEventListener('click',()=>{const d=dateFromKey(selectedDate);d.setDate(d.getDate()-1);setDate(localDateKey(d))});
+ document.getElementById('nextDate').addEventListener('click',()=>{const d=dateFromKey(selectedDate);d.setDate(d.getDate()+1);setDate(localDateKey(d))});
+ document.getElementById('dateInput').addEventListener('change',e=>{if(e.target.value)setDate(e.target.value)});
+ document.getElementById('calendarBtn').addEventListener('click',openCalendar);
+ document.getElementById('prevMonth').addEventListener('click',()=>{monthCursor.setMonth(monthCursor.getMonth()-1);renderCalendar()});
+ document.getElementById('nextMonth').addEventListener('click',()=>{monthCursor.setMonth(monthCursor.getMonth()+1);renderCalendar()});
+ document.getElementById('calendarToday').addEventListener('click',()=>{setDate(todayKey());closeOverlay('calendarOverlay')});
+ document.getElementById('addTaskBtn').addEventListener('click',()=>openTaskEditor());
+ document.getElementById('saveTaskBtn').addEventListener('click',saveTask);
+ document.getElementById('deleteTaskBtn').addEventListener('click',deleteTask);
+ document.getElementById('editFocusBtn').addEventListener('click',()=>{document.getElementById('focusInput').value=currentDay().focus||'';openOverlay('focusOverlay')});
+ document.getElementById('saveFocusBtn').addEventListener('click',saveFocus);
+ document.getElementById('backupBtn').addEventListener('click',exportBackup);
+ document.getElementById('exportBtn').addEventListener('click',exportBackup);
+ document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
+ document.getElementById('importFile').addEventListener('change',e=>{const file=e.target.files?.[0];if(file)importBackup(file);e.target.value=''});
+ document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>closeOverlay(btn.dataset.close)));
+ document.querySelectorAll('.overlay').forEach(overlay=>overlay.addEventListener('click',e=>{if(e.target===overlay)closeOverlay(overlay.id)}));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.overlay.open').forEach(el=>closeOverlay(el.id))});
+ document.querySelectorAll('.beat-preset').forEach(btn=>btn.addEventListener('click',()=>selectBeat(btn.dataset.beat)));
+ document.getElementById('audioPlay').addEventListener('click',()=>{if(audioContext&&audioContext.state==='running')pauseAudio();else startAudio()});
+ document.getElementById('audioStop').addEventListener('click',stopAudio);
+ document.getElementById('volume').addEventListener('input',e=>{const v=Number(e.target.value);document.getElementById('volumeValue').textContent=v+'%';if(masterGain&&audioContext)masterGain.gain.setTargetAtTime(v/100,audioContext.currentTime,.03)});
+ window.addEventListener('beforeunload',()=>{if(audioContext)audioContext.close()});
+
+// Startup: today's date is selected; no reset or weekday-only completion state exists.
+ensureDate(selectedDate);render();
+if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Service worker:',err)))}
+</script>
+</body>
+</html>
